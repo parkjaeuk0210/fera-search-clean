@@ -101,11 +101,13 @@ export function Search() {
           if (!newResponse.ok) throw new Error('Search failed');
           const result = await newResponse.json();
           console.log('Fallback Search API Response:', JSON.stringify(result, null, 2));
-          if (result.sessionId) {
-            setSessionId(result.sessionId);
-            setOriginalQuery(searchQuery);
-            setIsFollowUp(false);
-          }
+          
+          // Create new session for the fallback search
+          const session = createSession(followUpQuery, result.summary, result.sources);
+          setSessionId(session.id);
+          setOriginalQuery(searchQuery);
+          setIsFollowUp(false);
+          
           return result;
         }
         throw new Error('Follow-up failed');
