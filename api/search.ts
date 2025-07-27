@@ -13,7 +13,7 @@ marked.setOptions({
 // Initialize the Gemini model
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
 const model = genAI.getGenerativeModel({
-  model: "gemini-2.5-flash-lite",
+  model: "gemini-2.0-flash-exp",
   generationConfig: {
     temperature: 0.9,
     topP: 1,
@@ -22,8 +22,6 @@ const model = genAI.getGenerativeModel({
   },
 });
 
-// Store chat sessions in memory (Note: This will reset on each deployment)
-const chatSessions = new Map<string, any>();
 
 // Format raw text into proper HTML
 async function formatResponseToHTML(text: string | Promise<string>): Promise<string> {
@@ -117,20 +115,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     
     const sources = Array.from(sourceMap.values());
     
-    // Generate a session ID
-    const sessionId = Math.random().toString(36).substring(7);
-    chatSessions.set(sessionId, chat);
-    
-    // Clean up old sessions (keep only last 100)
-    if (chatSessions.size > 100) {
-      const firstKey = chatSessions.keys().next().value;
-      if (firstKey) {
-        chatSessions.delete(firstKey);
-      }
-    }
-    
     res.status(200).json({
-      sessionId,
       summary: formattedText,
       sources,
     });

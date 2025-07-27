@@ -4,10 +4,12 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 import { SearchInput } from '@/components/SearchInput';
 import { SearchResults } from '@/components/SearchResults';
 import { FollowUpInput } from '@/components/FollowUpInput';
+import { SearchHistory } from '@/components/SearchHistory';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SourceList } from '@/components/SourceList';
+import { useSearchHistory } from '@/hooks/useSearchHistory';
 
 export function Search() {
   const [location, setLocation] = useLocation();
@@ -16,6 +18,18 @@ export function Search() {
   const [originalQuery, setOriginalQuery] = useState<string | null>(null);
   const [isFollowUp, setIsFollowUp] = useState(false);
   const [followUpQuery, setFollowUpQuery] = useState<string | null>(null);
+  
+  // Search history hook
+  const {
+    history,
+    createSession,
+    addToSession,
+    getCurrentSession,
+    setCurrentSession,
+    deleteSession,
+    clearHistory,
+    getConversationHistory,
+  } = useSearchHistory();
   
   // Extract query from URL, handling both initial load and subsequent navigation
   const getQueryFromUrl = () => {
@@ -34,14 +48,16 @@ export function Search() {
       if (!response.ok) throw new Error('Search failed');
       const result = await response.json();
       console.log('Search API Response:', JSON.stringify(result, null, 2));
-      if (result.sessionId) {
-        setSessionId(result.sessionId);
-        setCurrentResults(result);
-        if (!originalQuery) {
-          setOriginalQuery(searchQuery);
-        }
-        setIsFollowUp(false);
+      
+      // Create new session in local storage
+      const session = createSession(searchQuery, result.summary, result.sources);
+      setSessionId(session.id);
+      setCurrentResults(result);
+      if (!originalQuery) {
+        setOriginalQuery(searchQuery);
       }
+      setIsFollowUp(false);
+      
       return result;
     },
     enabled: !!searchQuery,
@@ -55,22 +71,27 @@ export function Search() {
         if (!response.ok) throw new Error('Search failed');
         const result = await response.json();
         console.log('New Search API Response:', JSON.stringify(result, null, 2));
-        if (result.sessionId) {
-          setSessionId(result.sessionId);
-          setOriginalQuery(searchQuery);
-          setIsFollowUp(false);
-        }
+        
+        // Create new session if no session exists
+        const session = createSession(followUpQuery, result.summary, result.sources);
+        setSessionId(session.id);
+        setOriginalQuery(searchQuery);
+        setIsFollowUp(false);
+        
         return result;
       }
 
+      // Get conversation history for context
+      const conversationHistory = getConversationHistory(sessionId);
+      
       const response = await fetch('/api/follow-up', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          sessionId,
           query: followUpQuery,
+          conversationHistory,
         }),
       });
       
@@ -92,6 +113,12 @@ export function Search() {
       
       const result = await response.json();
       console.log('Follow-up API Response:', JSON.stringify(result, null, 2));
+      
+      // Add to session history
+      if (sessionId) {
+        addToSession(sessionId, followUpQuery, result.summary, result.sources);
+      }
+      
       return result;
     },
     onSuccess: (result) => {
@@ -170,7 +197,7 @@ export function Search() {
             <ArrowLeft className="h-5 w-5" />
           </Button>
 
-          <div className="w-full max-w-2xl">
+          <div className="w-full max-w-2xl flex-1">
             <SearchInput
               onSearch={handleSearch}
               initialValue={searchQuery}
@@ -179,6 +206,33 @@ export function Search() {
               large={false}
             />
           </div>
+          
+          <SearchHistory
+            sessions={history.sessions}
+            currentSessionId={history.currentSessionId}
+            onSelectSession={(session) => {
+              // Load session and display the conversation
+              setSessionId(session.id);
+              setCurrentSession(session.id);
+              setOriginalQuery(session.originalQuery);
+              
+              // Display the latest conversation from the session
+              const lastConversation = session.conversations[session.conversations.length - 1];
+              setCurrentResults({
+                summary: lastConversation.response,
+                sources: lastConversation.sources,
+              });
+              
+              // Update the search input with the original query
+              setSearchQuery(session.originalQuery);
+              setIsFollowUp(session.conversations.length > 1);
+              if (session.conversations.length > 1) {
+                setFollowUpQuery(lastConversation.query);
+              }
+            }}
+            onDeleteSession={deleteSession}
+            onClearHistory={clearHistory}
+          />
         </motion.div>
 
         <AnimatePresence mode="wait">

@@ -1,10 +1,19 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { marked } from 'marked';
+
+// Configure marked for better formatting
+marked.setOptions({
+  breaks: true,
+  gfm: true,
+  headerIds: false,
+  mangle: false,
+});
 
 // Initialize the Gemini model
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
 const model = genAI.getGenerativeModel({
-  model: "gemini-2.5-flash-lite",
+  model: "gemini-2.0-flash-exp",
   generationConfig: {
     temperature: 0.9,
     topP: 1,
@@ -13,12 +22,14 @@ const model = genAI.getGenerativeModel({
   },
 });
 
-// Shared chat sessions (Note: This will reset on each deployment)
-// In production, you might want to use a persistent storage solution
-const chatSessions = new Map<string, any>();
+// Interface for conversation history
+interface ConversationEntry {
+  query: string;
+  response: string;
+}
 
-// Format raw text into proper markdown
-async function formatResponseToMarkdown(text: string | Promise<string>): Promise<string> {
+// Format raw text into proper HTML
+async function formatResponseToHTML(text: string | Promise<string>): Promise<string> {
   const resolvedText = await Promise.resolve(text);
   let processedText = resolvedText.replace(/\r\n/g, "\n");
   
@@ -34,7 +45,9 @@ async function formatResponseToMarkdown(text: string | Promise<string>): Promise
   // Process numbered lists
   processedText = processedText.replace(/^(\d+)\.\s*/gm, "$1. ");
   
-  return processedText.trim();
+  // Convert markdown to HTML
+  const html = marked(processedText.trim());
+  return html;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -52,39 +65,50 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
   
   try {
-    const { sessionId, query } = req.body;
+    const { query, conversationHistory } = req.body;
     
-    if (!sessionId || !query) {
+    if (!query) {
       return res.status(400).json({
-        message: "Both sessionId and query are required",
+        message: "Query is required",
       });
     }
     
-    // For Vercel serverless, we need to recreate the chat session
-    // In a real production app, you'd want to use a persistent storage solution
-    // For now, we'll create a new chat session if the old one doesn't exist
-    let chat = chatSessions.get(sessionId);
+    // Build conversation history for context
+    let history: Array<{ role: string; parts: Array<{ text: string }> }> = [];
     
-    if (!chat) {
-      // Create a new chat session if not found
-      chat = model.startChat({
-        tools: [
-          {
-            // @ts-ignore
-            google_search: {},
-          },
-        ],
+    if (conversationHistory && Array.isArray(conversationHistory)) {
+      conversationHistory.forEach((entry: ConversationEntry) => {
+        // Add user query
+        history.push({
+          role: "user",
+          parts: [{ text: entry.query }]
+        });
+        // Add model response
+        history.push({
+          role: "model", 
+          parts: [{ text: entry.response }]
+        });
       });
-      chatSessions.set(sessionId, chat);
     }
+    
+    // Create a new chat session with history
+    const chat = model.startChat({
+      history,
+      tools: [
+        {
+          // @ts-ignore
+          google_search: {},
+        },
+      ],
+    });
     
     // Send follow-up message
     const result = await chat.sendMessage(query);
     const response = await result.response;
     const text = response.text();
     
-    // Format the response text
-    const formattedText = await formatResponseToMarkdown(text);
+    // Format the response text to HTML
+    const formattedText = await formatResponseToHTML(text);
     
     // Extract sources from grounding metadata
     const sourceMap = new Map<string, { title: string; url: string; snippet: string }>();
@@ -116,7 +140,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const sources = Array.from(sourceMap.values());
     
     res.status(200).json({
-      sessionId,
       summary: formattedText,
       sources,
     });
