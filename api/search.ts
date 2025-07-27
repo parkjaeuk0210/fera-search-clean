@@ -1,5 +1,14 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { marked } from 'marked';
+
+// Configure marked for better formatting
+marked.setOptions({
+  breaks: true,
+  gfm: true,
+  headerIds: false,
+  mangle: false,
+});
 
 // Initialize the Gemini model
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
@@ -16,8 +25,8 @@ const model = genAI.getGenerativeModel({
 // Store chat sessions in memory (Note: This will reset on each deployment)
 const chatSessions = new Map<string, any>();
 
-// Format raw text into proper markdown
-async function formatResponseToMarkdown(text: string | Promise<string>): Promise<string> {
+// Format raw text into proper HTML
+async function formatResponseToHTML(text: string | Promise<string>): Promise<string> {
   const resolvedText = await Promise.resolve(text);
   let processedText = resolvedText.replace(/\r\n/g, "\n");
   
@@ -33,7 +42,9 @@ async function formatResponseToMarkdown(text: string | Promise<string>): Promise
   // Process numbered lists
   processedText = processedText.replace(/^(\d+)\.\s*/gm, "$1. ");
   
-  return processedText.trim();
+  // Convert markdown to HTML
+  const html = marked(processedText.trim());
+  return html;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -74,8 +85,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const response = await result.response;
     const text = response.text();
     
-    // Format the response text
-    const formattedText = await formatResponseToMarkdown(text);
+    // Format the response text to HTML
+    const formattedText = await formatResponseToHTML(text);
     
     // Extract sources from grounding metadata
     const sourceMap = new Map<string, { title: string; url: string; snippet: string }>();
