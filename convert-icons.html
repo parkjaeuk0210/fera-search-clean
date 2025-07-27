@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Icon Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .icon-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .icon-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        canvas {
+            border: 1px solid #ddd;
+            display: block;
+            margin: 10px auto;
+        }
+        button {
+            background: #64B5F6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #42A5F5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fera Search - Simplified Icons</h1>
+    <p>아래 아이콘 중 하나를 선택하고 "Download PNG" 버튼을 클릭하세요.</p>
+    
+    <div class="icon-container">
+        <div class="icon-box">
+            <h3>Simplified Compass</h3>
+            <canvas id="canvas1" width="512" height="512"></canvas>
+            <button onclick="downloadPNG('canvas1', 'fera-icon-compass.png')">Download PNG</button>
+        </div>
+        
+        <div class="icon-box">
+            <h3>Ultra Simple</h3>
+            <canvas id="canvas2" width="512" height="512"></canvas>
+            <button onclick="downloadPNG('canvas2', 'fera-icon-simple.png')">Download PNG</button>
+        </div>
+        
+        <div class="icon-box">
+            <h3>Modern Abstract</h3>
+            <canvas id="canvas3" width="512" height="512"></canvas>
+            <button onclick="downloadPNG('canvas3', 'fera-icon-modern.png')">Download PNG</button>
+        </div>
+    </div>
+
+    <script>
+        // Draw simplified compass
+        function drawCompass() {
+            const canvas = document.getElementById('canvas1');
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#0A0F1B';
+            ctx.fillRect(0, 0, 512, 512);
+            
+            // Center
+            ctx.translate(256, 256);
+            
+            // Main circle
+            ctx.strokeStyle = '#64B5F6';
+            ctx.lineWidth = 8;
+            ctx.globalAlpha = 0.8;
+            ctx.beginPath();
+            ctx.arc(0, 0, 120, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // Inner circle
+            ctx.lineWidth = 4;
+            ctx.globalAlpha = 0.6;
+            ctx.beginPath();
+            ctx.arc(0, 0, 80, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // Cross lines
+            ctx.globalAlpha = 1;
+            ctx.strokeStyle = '#81C9FA';
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.moveTo(0, -140);
+            ctx.lineTo(0, 140);
+            ctx.moveTo(-140, 0);
+            ctx.lineTo(140, 0);
+            ctx.stroke();
+            
+            // Cardinal points
+            ctx.fillStyle = '#B3E5FC';
+            const points = [[0, -100], [100, 0], [0, 100], [-100, 0]];
+            points.forEach(([x, y]) => {
+                ctx.beginPath();
+                ctx.arc(x, y, 8, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+        
+        // Draw ultra simple
+        function drawSimple() {
+            const canvas = document.getElementById('canvas2');
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#0A0F1B';
+            ctx.fillRect(0, 0, 512, 512);
+            
+            // Center
+            ctx.translate(256, 256);
+            
+            // Main circle
+            ctx.strokeStyle = '#64B5F6';
+            ctx.lineWidth = 12;
+            ctx.beginPath();
+            ctx.arc(0, 0, 100, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // Simple cross
+            ctx.strokeStyle = '#81C9FA';
+            ctx.lineWidth = 10;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(0, -100);
+            ctx.lineTo(0, 100);
+            ctx.moveTo(-100, 0);
+            ctx.lineTo(100, 0);
+            ctx.stroke();
+        }
+        
+        // Draw modern abstract
+        function drawModern() {
+            const canvas = document.getElementById('canvas3');
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#0A0F1B';
+            ctx.fillRect(0, 0, 512, 512);
+            
+            // Center
+            ctx.translate(256, 256);
+            
+            // Create gradient
+            const gradient = ctx.createLinearGradient(-120, -120, 120, 120);
+            gradient.addColorStop(0, '#64B5F6');
+            gradient.addColorStop(0.5, '#81C9FA');
+            gradient.addColorStop(1, '#B3E5FC');
+            
+            // Star shape
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 8;
+            ctx.beginPath();
+            ctx.moveTo(0, -120);
+            ctx.quadraticCurveTo(-20, -20, -120, 0);
+            ctx.quadraticCurveTo(-20, 20, 0, 120);
+            ctx.quadraticCurveTo(20, 20, 120, 0);
+            ctx.quadraticCurveTo(20, -20, 0, -120);
+            ctx.closePath();
+            ctx.stroke();
+            
+            // Center dot
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(0, 0, 16, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        // Download function
+        function downloadPNG(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Draw all icons on load
+        window.onload = function() {
+            drawCompass();
+            drawSimple();
+            drawModern();
+        };
+    </script>
+</body>
+</html>

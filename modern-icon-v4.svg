@@ -1,0 +1,24 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#0A0F1B"/>
+  
+  <!-- Infinity loop design -->
+  <g transform="translate(256, 256)">
+    <!-- Infinity symbol -->
+    <path d="M -100,0 C -100,-60 -60,-60 0,0 C 60,60 100,60 100,0 C 100,-60 60,-60 0,0 C -60,60 -100,60 -100,0" 
+          fill="none" stroke="url(#grad3)" stroke-width="16"/>
+    
+    <!-- Glowing dots at intersections -->
+    <circle cx="0" cy="0" r="20" fill="url(#grad3)" opacity="0.8"/>
+    <circle cx="-70" cy="0" r="12" fill="#B3E5FC"/>
+    <circle cx="70" cy="0" r="12" fill="#64B5F6"/>
+  </g>
+  
+  <defs>
+    <linearGradient id="grad3" x1="-100" y1="0" x2="100" y2="0">
+      <stop offset="0%" stop-color="#64B5F6"/>
+      <stop offset="50%" stop-color="#81C9FA"/>
+      <stop offset="100%" stop-color="#B3E5FC"/>
+    </linearGradient>
+  </defs>
+</svg>

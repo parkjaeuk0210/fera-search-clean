@@ -1,0 +1,27 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#0A0F1B"/>
+  
+  <!-- Minimal geometric design -->
+  <g transform="translate(256, 256)">
+    <!-- Overlapping circles -->
+    <circle cx="-40" cy="0" r="80" fill="none" stroke="#64B5F6" stroke-width="8" opacity="0.8"/>
+    <circle cx="40" cy="0" r="80" fill="none" stroke="#B3E5FC" stroke-width="8" opacity="0.8"/>
+    
+    <!-- Center intersection highlight -->
+    <ellipse cx="0" cy="0" rx="30" ry="80" fill="url(#grad5)" opacity="0.3"/>
+    
+    <!-- Accent dots -->
+    <circle cx="-40" cy="0" r="6" fill="#64B5F6"/>
+    <circle cx="40" cy="0" r="6" fill="#B3E5FC"/>
+    <circle cx="0" cy="0" r="8" fill="#81C9FA"/>
+  </g>
+  
+  <defs>
+    <linearGradient id="grad5" x1="0" y1="-80" x2="0" y2="80">
+      <stop offset="0%" stop-color="#B3E5FC" opacity="0.2"/>
+      <stop offset="50%" stop-color="#81C9FA" opacity="0.4"/>
+      <stop offset="100%" stop-color="#64B5F6" opacity="0.2"/>
+    </linearGradient>
+  </defs>
+</svg>

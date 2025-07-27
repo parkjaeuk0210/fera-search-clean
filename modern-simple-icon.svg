@@ -1,0 +1,24 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#0A0F1B"/>
+  
+  <!-- Modern abstract search icon -->
+  <g transform="translate(256, 256)">
+    <!-- Simplified star/sparkle shape -->
+    <path d="M 0,-120 Q -20,-20 -120,0 Q -20,20 0,120 Q 20,20 120,0 Q 20,-20 0,-120" 
+          fill="none" 
+          stroke="url(#gradient)" 
+          stroke-width="8"/>
+    
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="16" fill="url(#gradient)"/>
+  </g>
+  
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64B5F6"/>
+      <stop offset="50%" stop-color="#81C9FA"/>
+      <stop offset="100%" stop-color="#B3E5FC"/>
+    </linearGradient>
+  </defs>
+</svg>

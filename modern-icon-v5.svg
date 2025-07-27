@@ -1,0 +1,27 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#0A0F1B"/>
+  
+  <!-- Wave/Flow design -->
+  <g transform="translate(256, 256)">
+    <!-- Flowing waves -->
+    <path d="M -120,0 Q -60,-60 0,0 T 120,0" 
+          fill="none" stroke="url(#grad4)" stroke-width="14" opacity="0.9"/>
+    <path d="M -120,40 Q -60,-20 0,40 T 120,40" 
+          fill="none" stroke="url(#grad4)" stroke-width="10" opacity="0.7"/>
+    <path d="M -120,-40 Q -60,-100 0,-40 T 120,-40" 
+          fill="none" stroke="url(#grad4)" stroke-width="10" opacity="0.7"/>
+    
+    <!-- Center glow -->
+    <circle cx="0" cy="0" r="30" fill="url(#grad4)" opacity="0.3"/>
+    <circle cx="0" cy="0" r="15" fill="#B3E5FC"/>
+  </g>
+  
+  <defs>
+    <linearGradient id="grad4" x1="-120" y1="0" x2="120" y2="0">
+      <stop offset="0%" stop-color="#64B5F6" opacity="0.8"/>
+      <stop offset="50%" stop-color="#81C9FA"/>
+      <stop offset="100%" stop-color="#B3E5FC" opacity="0.8"/>
+    </linearGradient>
+  </defs>
+</svg>

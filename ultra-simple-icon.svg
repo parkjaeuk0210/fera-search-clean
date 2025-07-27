@@ -1,0 +1,13 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#0A0F1B"/>
+  
+  <!-- Ultra simplified design - just a circle with a cross -->
+  <g transform="translate(256, 256)">
+    <!-- Main circle -->
+    <circle cx="0" cy="0" r="100" stroke="#64B5F6" stroke-width="12" fill="none"/>
+    
+    <!-- Simple cross -->
+    <path d="M 0,-100 L 0,100 M -100,0 L 100,0" stroke="#81C9FA" stroke-width="10" stroke-linecap="round"/>
+  </g>
+</svg>

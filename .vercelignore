@@ -1,0 +1,9 @@
+.env
+node_modules
+server
+db
+drizzle.config.ts
+.git
+.gitignore
+*.md
+!README.md

@@ -1,0 +1,24 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#0A0F1B"/>
+  
+  <!-- Abstract F letter design for Fera -->
+  <g transform="translate(256, 256)">
+    <!-- F shape with modern twist -->
+    <path d="M -80,-120 L -80,120 M -80,-120 L 60,-120 M -80,0 L 40,0" 
+          stroke="url(#grad2)" stroke-width="20" stroke-linecap="round"/>
+    
+    <!-- Decorative dots -->
+    <circle cx="80" cy="-120" r="12" fill="#B3E5FC"/>
+    <circle cx="60" cy="0" r="10" fill="#81C9FA"/>
+    <circle cx="-80" cy="120" r="8" fill="#64B5F6"/>
+  </g>
+  
+  <defs>
+    <linearGradient id="grad2" x1="-80" y1="-120" x2="80" y2="120">
+      <stop offset="0%" stop-color="#B3E5FC"/>
+      <stop offset="50%" stop-color="#81C9FA"/>
+      <stop offset="100%" stop-color="#64B5F6"/>
+    </linearGradient>
+  </defs>
+</svg>
