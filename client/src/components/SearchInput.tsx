@@ -79,10 +79,7 @@ export function SearchInput({
         {isLoading ? (
           <Loader2 className={cn("animate-spin", large ? "h-5 w-5" : "h-4 w-4")} />
         ) : (
-          <>
-            <span>Search</span>
-            <Sparkles className="h-4 w-4" />
-          </>
+          <Sparkles className="h-4 w-4" />
         )}
       </button>
     </div>
