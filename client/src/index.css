@@ -12,6 +12,16 @@ html, body, #root {
   padding: 0 !important;
 }
 
+/* Force remove any top spacing */
+body > * {
+  margin-top: 0 !important;
+}
+
+/* Fix for potential toast viewport issue */
+[data-radix-popper-content-wrapper] {
+  margin-top: 0 !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
