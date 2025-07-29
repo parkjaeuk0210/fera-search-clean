@@ -95,6 +95,8 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    margin: 0 !important;
+    padding: 0 !important;
     font-feature-settings: "rlig" 1, "calt" 1;
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
     background-attachment: fixed;

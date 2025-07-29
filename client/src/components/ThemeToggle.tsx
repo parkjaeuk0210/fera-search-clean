@@ -27,7 +27,7 @@ export function ThemeToggle() {
     <button
       onClick={toggleTheme}
       className={cn(
-        "fixed z-50",
+        "fixed z-[60]",
         isMobile ? "bottom-20 left-4" : "top-4 left-4",
         "w-11 h-11 sm:w-12 sm:h-12 rounded-2xl",
         "bg-background/60 backdrop-blur-lg",

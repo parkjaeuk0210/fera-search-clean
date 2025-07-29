@@ -3,10 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Wifi, WifiOff, AlertCircle } from 'lucide-react';
 import { useNetworkStatus } from '@/hooks/useNetworkStatus';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export function NetworkStatus() {
   const { isOnline, isSlowConnection } = useNetworkStatus();
   const [showStatus, setShowStatus] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!isOnline || isSlowConnection) {
@@ -27,7 +29,8 @@ export function NetworkStatus() {
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
           className={cn(
-            "fixed top-4 left-1/2 -translate-x-1/2 z-50",
+            "fixed z-40",
+            isMobile ? "top-4 left-1/2 -translate-x-1/2" : "top-16 left-1/2 -translate-x-1/2",
             "px-4 py-2 rounded-full",
             "backdrop-blur-lg shadow-lg",
             "flex items-center gap-2",
