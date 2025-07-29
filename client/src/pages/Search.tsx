@@ -169,23 +169,23 @@ export function Search() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="min-h-screen relative overflow-hidden"
+      className="min-h-screen relative overflow-hidden safe-area-padding"
     >
       {/* Gradient background */}
       <div className="absolute inset-0 gradient-bg-light dark:gradient-bg opacity-50" />
       
-      {/* Floating orbs for decoration */}
-      <div className="absolute top-10 right-10 w-48 h-48 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-float" />
-      <div className="absolute bottom-20 left-20 w-64 h-64 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-float" style={{ animationDelay: '3s' }} />
+      {/* Floating orbs for decoration - smaller on mobile */}
+      <div className="absolute top-10 right-10 w-32 sm:w-48 h-32 sm:h-48 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 sm:opacity-40 animate-float" />
+      <div className="absolute bottom-20 left-10 sm:left-20 w-48 sm:w-64 h-48 sm:h-64 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 sm:opacity-40 animate-float" style={{ animationDelay: '3s' }} />
       
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="max-w-6xl mx-auto p-4 relative z-10"
+        className="max-w-6xl mx-auto p-3 sm:p-4 relative z-10"
       >
         <motion.div 
-          className="flex items-center gap-4 mb-6"
+          className="flex items-center gap-2 sm:gap-4 mb-4 sm:mb-6"
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.1 }}
@@ -194,7 +194,7 @@ export function Search() {
             variant="ghost"
             size="icon"
             onClick={() => setLocation('/')}
-            className="glass-button glass-hover rounded-xl touch-target"
+            className="glass-button glass-hover rounded-xl touch-target touch-feedback flex-shrink-0"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>

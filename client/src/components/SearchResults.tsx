@@ -79,16 +79,16 @@ export function SearchResults({
       >
         {isFollowUp && originalQuery && (
           <>
-            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 text-xs sm:text-sm text-muted-foreground/70">
-              <span>Original search:</span>
+            <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground/70">
+              <span>원래 검색:</span>
               <span className="font-medium">"{originalQuery}"</span>
             </div>
             <div className="h-px bg-border w-full" />
           </>
         )}
-        <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 text-sm sm:text-base text-muted-foreground">
-          <span>{isFollowUp ? 'Follow-up question:' : ''}</span>
-          <h1 className="font-serif text-lg sm:text-3xl text-foreground">"{query}"</h1>
+        <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 text-sm sm:text-base text-muted-foreground">
+          <span>{isFollowUp ? '후속 질문:' : ''}</span>
+          <h1 className="font-serif text-fluid-lg sm:text-3xl text-foreground">"{query}"</h1>
         </div>
       </motion.div>
 
@@ -104,25 +104,31 @@ export function SearchResults({
       )}
 
       {/* Main Content */}
-      <Card className="overflow-hidden shadow-md">
+      <Card className="overflow-hidden shadow-md touch-feedback">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.4 }}
-          className="py-4 px-8"
+          className="py-4 px-4 sm:px-6 md:px-8"
         >
           <div
             className={cn(
               "prose prose-slate max-w-none",
               "dark:prose-invert",
-              "prose-headings:font-bold prose-headings:mb-4",
-              "prose-h2:text-2xl prose-h2:mt-8 prose-h2:border-b prose-h2:pb-2 prose-h2:border-border",
-              "prose-h3:text-xl prose-h3:mt-6",
-              "prose-p:text-base prose-p:leading-7 prose-p:my-4",
-              "prose-ul:my-6 prose-ul:list-disc prose-ul:pl-6",
-              "prose-li:my-2 prose-li:marker:text-muted-foreground",
+              // Mobile-optimized typography
+              "prose-sm sm:prose-base",
+              "prose-headings:font-bold prose-headings:mb-3 sm:prose-headings:mb-4",
+              "prose-h2:text-lg sm:prose-h2:text-2xl prose-h2:mt-6 sm:prose-h2:mt-8 prose-h2:border-b prose-h2:pb-2 prose-h2:border-border",
+              "prose-h3:text-base sm:prose-h3:text-xl prose-h3:mt-4 sm:prose-h3:mt-6",
+              "prose-p:text-sm sm:prose-p:text-base prose-p:leading-6 sm:prose-p:leading-7 prose-p:my-3 sm:prose-p:my-4",
+              "prose-ul:my-4 sm:prose-ul:my-6 prose-ul:list-disc prose-ul:pl-4 sm:prose-ul:pl-6",
+              "prose-li:my-1 sm:prose-li:my-2 prose-li:marker:text-muted-foreground",
               "prose-strong:font-semibold",
               "prose-a:text-primary prose-a:no-underline hover:prose-a:text-primary/80",
+              // Mobile-specific optimizations
+              "prose-code:text-xs sm:prose-code:text-sm",
+              "prose-pre:text-xs sm:prose-pre:text-sm",
+              "prose-blockquote:text-sm sm:prose-blockquote:text-base",
             )}
             dangerouslySetInnerHTML={{ 
               __html: results.summary

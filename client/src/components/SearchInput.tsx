@@ -47,16 +47,21 @@ export function SearchInput({
           onKeyDown={handleKeyDown}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          placeholder="Ask anything..."
+          placeholder="무엇이든 물어보세요..."
           className={cn(
-            "w-full pl-12 pr-4 py-3 glass-input rounded-2xl",
+            "w-full pl-10 sm:pl-12 pr-4 py-3 glass-input rounded-2xl",
             "transition-all duration-200",
             large && "py-4 text-lg",
             "focus:ring-4 focus:ring-primary/30 outline-none",
-            "touch-target"
+            "touch-target touch-manipulation",
+            "placeholder:text-muted-foreground/50"
           )}
           disabled={isLoading}
           autoFocus={autoFocus}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
         />
         
         {isFocused && query && (
@@ -68,12 +73,13 @@ export function SearchInput({
         onClick={handleSubmit}
         disabled={!query.trim() || isLoading}
         className={cn(
-          "px-6 py-3 rounded-2xl font-medium",
-          "glass-button glass-hover glass-active",
+          "px-4 sm:px-6 py-3 rounded-2xl font-medium",
+          "glass-button glass-hover glass-active touch-feedback",
           "transition-all duration-200",
-          large && "px-8 py-4 text-lg",
+          large && "px-6 sm:px-8 py-4 text-lg",
           "disabled:opacity-50 disabled:hover:transform-none disabled:hover:shadow-none",
-          "touch-target flex items-center gap-2"
+          "touch-target flex items-center gap-2",
+          "whitespace-nowrap"
         )}
       >
         {isLoading ? (
