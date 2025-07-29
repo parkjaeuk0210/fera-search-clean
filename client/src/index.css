@@ -1,5 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
 
+/* Critical reset to prevent whitespace issues */
+html, body, #root {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  position: relative;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -76,6 +98,8 @@
     font-feature-settings: "rlig" 1, "calt" 1;
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
     background-attachment: fixed;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -383,10 +407,7 @@
   }
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
+/* Smooth scrolling - already defined at the top */
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {

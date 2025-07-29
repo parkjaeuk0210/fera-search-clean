@@ -11,7 +11,7 @@ function App() {
   const [location] = useLocation();
 
   return (
-    <div className="min-h-screen relative">
+    <>
       <NetworkStatus />
       <ThemeToggle />
       <AnimatePresence mode="wait">
@@ -21,7 +21,7 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       </AnimatePresence>
-    </div>
+    </>
   );
 }
 

@@ -174,7 +174,7 @@ export function Search() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="min-h-screen bg-background relative overflow-hidden"
+      className="fixed inset-0 bg-background overflow-y-auto"
     >
       {/* Gradient background */}
       <div className="absolute inset-0 gradient-bg-light dark:gradient-bg opacity-50" />
@@ -184,8 +184,8 @@ export function Search() {
       <div className="absolute bottom-20 left-10 sm:left-20 w-48 sm:w-64 h-48 sm:h-64 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 sm:opacity-40 animate-float" style={{ animationDelay: '3s' }} />
       
       <motion.div
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
         className="max-w-6xl mx-auto p-3 sm:p-4 relative z-10"
       >
