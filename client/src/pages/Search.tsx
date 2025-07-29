@@ -174,21 +174,23 @@ export function Search() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="fixed inset-0 bg-background overflow-y-auto"
+      className="min-h-screen bg-background overflow-y-auto"
     >
-      {/* Gradient background */}
-      <div className="absolute inset-0 gradient-bg-light dark:gradient-bg opacity-50" />
-      
-      {/* Floating orbs for decoration - smaller on mobile */}
-      <div className="absolute top-10 right-10 w-32 sm:w-48 h-32 sm:h-48 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 sm:opacity-40 animate-float" />
-      <div className="absolute bottom-20 left-10 sm:left-20 w-48 sm:w-64 h-48 sm:h-64 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 sm:opacity-40 animate-float" style={{ animationDelay: '3s' }} />
-      
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
-        className="max-w-6xl mx-auto p-3 sm:p-4 relative z-10"
-      >
+      {/* Inner container for background and content */}
+      <div className="relative min-h-screen">
+        {/* Gradient background */}
+        <div className="absolute inset-0 gradient-bg-light dark:gradient-bg opacity-50" />
+        
+        {/* Floating orbs for decoration - smaller on mobile */}
+        <div className="absolute top-10 right-10 w-32 sm:w-48 h-32 sm:h-48 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 sm:opacity-40 animate-float" />
+        <div className="absolute bottom-20 left-10 sm:left-20 w-48 sm:w-64 h-48 sm:h-64 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 sm:opacity-40 animate-float" style={{ animationDelay: '3s' }} />
+        
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="relative z-10 max-w-6xl mx-auto p-3 sm:p-4"
+        >
         <motion.div 
           className="flex items-center gap-2 sm:gap-4 mb-4 sm:mb-6"
           initial={{ x: -20, opacity: 0 }}
@@ -285,6 +287,7 @@ export function Search() {
           className="md:hidden"
         />
       )}
+      </div>
     </motion.div>
   );
 }
