@@ -1,55 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
 
-/* Critical CSS Reset - Must be first */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body, #root {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Force remove any top spacing */
-body > * {
-  margin-top: 0 !important;
-}
-
-/* Fix for potential toast viewport issue */
-[data-radix-popper-content-wrapper] {
-  margin-top: 0 !important;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  /* Remove ALL margins/paddings */
-  html {
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow-x: hidden;
-  }
-  
-  body {
-    margin: 0 !important;
-    padding: 0 !important;
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
-  }
-  
-  #root {
-    margin: 0 !important;
-    padding: 0 !important;
-    min-height: 100vh;
-    position: relative;
-  }
-  
-  
   :root {
     /* Apple-inspired glassmorphism color palette */
     --background: 240 10% 98%;
@@ -118,8 +73,6 @@ body > * {
 
   body {
     @apply bg-background text-foreground antialiased;
-    margin: 0 !important;
-    padding: 0 !important;
     font-feature-settings: "rlig" 1, "calt" 1;
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
     background-attachment: fixed;
