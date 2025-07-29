@@ -4,18 +4,22 @@ import { Search } from "@/pages/Search";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
+import { NetworkStatus } from "@/components/NetworkStatus";
 
 function App() {
   const [location] = useLocation();
 
   return (
-    <AnimatePresence mode="wait">
-      <Switch location={location} key={location}>
-        <Route path="/" component={Home} />
-        <Route path="/search" component={Search} />
-        <Route component={NotFound} />
-      </Switch>
-    </AnimatePresence>
+    <>
+      <NetworkStatus />
+      <AnimatePresence mode="wait">
+        <Switch location={location} key={location}>
+          <Route path="/" component={Home} />
+          <Route path="/search" component={Search} />
+          <Route component={NotFound} />
+        </Switch>
+      </AnimatePresence>
+    </>
   );
 }
 

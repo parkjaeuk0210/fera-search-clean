@@ -12,6 +12,7 @@ import { SourceList } from '@/components/SourceList';
 import { useSearchHistory } from '@/hooks/useSearchHistory';
 import { FloatingActionButton } from '@/components/FloatingActionButton';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useVirtualKeyboard } from '@/hooks/useVirtualKeyboard';
 
 export function Search() {
   const [location, setLocation] = useLocation();
@@ -21,6 +22,7 @@ export function Search() {
   const [isFollowUp, setIsFollowUp] = useState(false);
   const [followUpQuery, setFollowUpQuery] = useState<string | null>(null);
   const isMobile = useIsMobile();
+  const { keyboardHeight } = useVirtualKeyboard();
   
   // Search history hook
   const {
