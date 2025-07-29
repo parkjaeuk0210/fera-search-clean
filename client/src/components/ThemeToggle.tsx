@@ -2,10 +2,12 @@
 import { Moon, Sun, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState("light");
   const [isAnimating, setIsAnimating] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const isDark = document.documentElement.classList.contains("dark");
@@ -25,7 +27,8 @@ export function ThemeToggle() {
     <button
       onClick={toggleTheme}
       className={cn(
-        "fixed top-4 right-4 z-50",
+        "fixed z-50",
+        isMobile ? "bottom-20 left-4" : "top-4 left-4",
         "w-11 h-11 sm:w-12 sm:h-12 rounded-2xl",
         "bg-background/60 backdrop-blur-lg",
         "border border-border/50",
@@ -35,7 +38,8 @@ export function ThemeToggle() {
         "overflow-hidden",
         "hover:bg-background/80 hover:border-border/80",
         "hover:shadow-lg",
-        "active:scale-95"
+        "active:scale-95",
+        isMobile && "safe-bottom"
       )}
       aria-label="Toggle theme"
     >
