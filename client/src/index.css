@@ -248,6 +248,26 @@
   animation: slide-in 0.3s ease-out forwards;
 }
 
+/* Reduce animation on mobile for better performance */
+@media (max-width: 768px) {
+  .animate-float {
+    animation: none;
+    transform: translateY(0);
+  }
+  
+  .animate-pulse-soft {
+    animation: pulse-soft 3s ease-in-out infinite; /* Slower animation */
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
 /* Mobile-first breakpoints */
 :root {
   --mobile-sm: 375px;

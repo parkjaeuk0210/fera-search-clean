@@ -10,6 +10,8 @@ import { ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SourceList } from '@/components/SourceList';
 import { useSearchHistory } from '@/hooks/useSearchHistory';
+import { FloatingActionButton } from '@/components/FloatingActionButton';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export function Search() {
   const [location, setLocation] = useLocation();
@@ -18,6 +20,7 @@ export function Search() {
   const [originalQuery, setOriginalQuery] = useState<string | null>(null);
   const [isFollowUp, setIsFollowUp] = useState(false);
   const [followUpQuery, setFollowUpQuery] = useState<string | null>(null);
+  const isMobile = useIsMobile();
   
   // Search history hook
   const {
@@ -271,6 +274,15 @@ export function Search() {
           </motion.div>
         </AnimatePresence>
       </motion.div>
+
+      {/* Mobile Floating Action Button for new search */}
+      {isMobile && displayResults && (
+        <FloatingActionButton
+          icon="search"
+          onClick={() => setLocation('/')}
+          className="md:hidden"
+        />
+      )}
     </motion.div>
   );
 }
