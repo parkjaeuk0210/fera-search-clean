@@ -27,16 +27,17 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       className={cn(
         "fixed z-[60]",
-        isMobile ? "bottom-20 left-4" : "top-16 left-4",
+        isMobile ? "bottom-20 left-4" : "top-4 left-4",
         "w-11 h-11 sm:w-12 sm:h-12 rounded-2xl",
-        "bg-background/60 backdrop-blur-lg",
-        "border border-border/50",
+        "bg-background/80 backdrop-blur-xl",
+        "border border-border/60",
+        "shadow-lg shadow-black/10 dark:shadow-black/20",
         "transition-all duration-300",
         "group relative",
         "flex items-center justify-center",
         "overflow-hidden",
-        "hover:bg-background/80 hover:border-border/80",
-        "hover:shadow-lg",
+        "hover:bg-background/90 hover:border-border",
+        "hover:shadow-xl hover:scale-105",
         "active:scale-95",
         isMobile && "safe-bottom"
       )}
