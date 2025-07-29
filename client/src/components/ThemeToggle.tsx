@@ -26,15 +26,17 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       className={cn(
         "fixed top-4 right-4 z-50",
-        "p-3 rounded-2xl",
-        "glass-button glass-hover glass-active",
-        "touch-target",
+        "w-11 h-11 sm:w-12 sm:h-12 rounded-2xl", // 고정된 정사각형 크기, 모바일 약간 작게
+        "glass-button glass-hover glass-active touch-feedback",
         "transition-all duration-300",
-        "group"
+        "group",
+        "flex items-center justify-center", // 중앙 정렬
+        "overflow-hidden", // 오버플로우 숨김
+        "aspect-square" // 정사각형 비율 강제
       )}
       aria-label="Toggle theme"
     >
-      <div className="relative">
+      <div className="relative flex items-center justify-center">
         {theme === "light" ? (
           <Moon 
             className={cn(
