@@ -39,6 +39,23 @@ html, body, #root {
     position: relative;
   }
   
+  /* Fix for top whitespace on desktop */
+  @media (min-width: 769px) {
+    html {
+      margin-top: -30px !important;
+    }
+    
+    #root {
+      margin-top: -30px !important;
+    }
+    
+    /* Ensure no overflow at top */
+    body {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+  }
+  
   :root {
     /* Apple-inspired glassmorphism color palette */
     --background: 240 10% 98%;

@@ -30,7 +30,7 @@ export function NetworkStatus() {
           transition={{ duration: 0.3 }}
           className={cn(
             "fixed z-40",
-            isMobile ? "top-4 left-1/2 -translate-x-1/2" : "top-16 left-1/2 -translate-x-1/2",
+            isMobile ? "top-4 left-1/2 -translate-x-1/2" : "top-10 left-1/2 -translate-x-1/2",
             "px-4 py-2 rounded-full",
             "backdrop-blur-lg shadow-lg",
             "flex items-center gap-2",
