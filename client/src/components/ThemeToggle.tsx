@@ -26,13 +26,16 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       className={cn(
         "fixed top-4 right-4 z-50",
-        "w-11 h-11 sm:w-12 sm:h-12 rounded-2xl", // 고정된 정사각형 크기, 모바일 약간 작게
-        "glass-button glass-hover glass-active touch-feedback",
+        "w-11 h-11 sm:w-12 sm:h-12 rounded-2xl",
+        "bg-background/60 backdrop-blur-lg",
+        "border border-border/50",
         "transition-all duration-300",
-        "group",
-        "flex items-center justify-center", // 중앙 정렬
-        "overflow-hidden", // 오버플로우 숨김
-        "aspect-square" // 정사각형 비율 강제
+        "group relative",
+        "flex items-center justify-center",
+        "overflow-hidden",
+        "hover:bg-background/80 hover:border-border/80",
+        "hover:shadow-lg",
+        "active:scale-95"
       )}
       aria-label="Toggle theme"
     >
