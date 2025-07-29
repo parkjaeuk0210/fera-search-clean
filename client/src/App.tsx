@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <NetworkStatus />
-      <ThemeToggle />
+      {location === "/" && <ThemeToggle />}
       <AnimatePresence mode="wait">
         <Switch location={location} key={location}>
           <Route path="/" component={Home} />
