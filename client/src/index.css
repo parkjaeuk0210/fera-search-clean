@@ -5,6 +5,28 @@
 @tailwind utilities;
 
 @layer base {
+  /* Reset any default margins/paddings */
+  html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  #root {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
   :root {
     /* Apple-inspired glassmorphism color palette */
     --background: 240 10% 98%;

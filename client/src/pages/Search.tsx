@@ -174,7 +174,7 @@ export function Search() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="min-h-screen relative overflow-hidden safe-area-padding"
+      className="min-h-screen relative overflow-hidden"
     >
       {/* Gradient background */}
       <div className="absolute inset-0 gradient-bg-light dark:gradient-bg opacity-50" />

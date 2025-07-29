@@ -17,7 +17,7 @@ export function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden safe-area-padding">
+    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 gradient-bg-light dark:gradient-bg" />
       
