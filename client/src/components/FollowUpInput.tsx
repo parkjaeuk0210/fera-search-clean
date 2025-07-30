@@ -32,7 +32,6 @@ export function FollowUpInput({
     <div className="glass-card p-4 md:p-6">
       <div className="flex items-center gap-2 mb-3">
         <MessageSquarePlus className="h-5 w-5 text-primary" />
-        <span className="font-medium text-sm">Continue the conversation</span>
         <Sparkles className="h-4 w-4 text-yellow-400 animate-pulse" />
       </div>
       
