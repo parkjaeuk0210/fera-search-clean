@@ -31,7 +31,7 @@ export function Home() {
       <div className="absolute bottom-40 left-10 md:left-40 w-48 md:w-72 h-48 md:h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-50 md:opacity-70 animate-float hidden md:block" style={{ animationDelay: '4s' }} />
       
       <div className="w-full max-w-3xl px-4 md:px-6 animate-fade-in relative z-10">
-        <div className="glass-card p-6 sm:p-8 md:p-12 touch-feedback relative">
+        <div className="glass-card p-6 sm:p-8 md:p-12 relative">
           <ThemeToggle 
             className={cn(
               isMobile 

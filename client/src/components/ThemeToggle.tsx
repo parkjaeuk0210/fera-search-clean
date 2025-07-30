@@ -41,9 +41,8 @@ export function ThemeToggle({ className }: ThemeToggleProps = {}) {
         "overflow-hidden",
         "opacity-50 hover:opacity-100",
         "hover:bg-background/80 hover:border-border/50",
-        "hover:shadow-lg hover:scale-110",
+        "hover:shadow-lg",
         "active:scale-95",
-        "animate-float",
         className
       )}
       aria-label="Toggle theme"
