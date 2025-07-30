@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'wouter';
-import { Search, Sparkles, MousePointerClick, ArrowRight } from 'lucide-react';
+import { Search, Sparkles } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 
 export function Home() {
@@ -41,19 +41,6 @@ export function Home() {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              {/* Visual cue when input is empty - hidden on mobile */}
-              {!query && !isFocused && (
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none hidden sm:flex">
-                  <div className="flex items-center gap-3 animate-pulse">
-                    <MousePointerClick className="w-5 h-5 text-muted-foreground/50" />
-                    <div className="flex gap-1">
-                      <span className="w-2 h-2 bg-muted-foreground/30 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                      <span className="w-2 h-2 bg-muted-foreground/30 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                      <span className="w-2 h-2 bg-muted-foreground/30 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                    </div>
-                  </div>
-                </div>
-              )}
               
               <input
                 type="search"
@@ -61,7 +48,7 @@ export function Home() {
                 onChange={(e) => setQuery(e.target.value)}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
-                placeholder="무엇이든 물어보세요..."
+                placeholder=""
                 className="w-full px-4 sm:px-6 py-4 md:py-5 text-base md:text-lg rounded-2xl glass-input
                          focus:ring-4 focus:ring-primary/30 outline-none 
                          transition-all duration-300 
@@ -82,15 +69,9 @@ export function Home() {
                          disabled:opacity-50 disabled:hover:transform-none
                          disabled:hover:shadow-none touch-target"
               >
-                <Search className={`w-5 h-5 transition-all duration-300 ${isHovered && query.trim() ? 'text-primary' : 'text-muted-foreground'}`} />
+                <Search className={`w-5 h-5 transition-all duration-300 ${isHovered && query.trim() ? 'text-primary' : 'text-muted-foreground'} ${!query && 'animate-pulse-soft'}`} />
               </button>
               
-              {/* Animated arrow hint when hovering - hidden on mobile */}
-              {isHovered && !query && (
-                <div className="absolute -right-16 top-1/2 -translate-y-1/2 animate-slide-in hidden md:block">
-                  <ArrowRight className="w-6 h-6 text-primary/50 animate-pulse" />
-                </div>
-              )}
             </div>
             
           </form>
