@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { useLocation } from 'wouter';
 import { Search, Sparkles } from 'lucide-react';
 import { Logo } from '@/components/Logo';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export function Home() {
   const [query, setQuery] = useState('');
   const [, setLocation] = useLocation();
   const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const isMobile = useIsMobile();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +31,14 @@ export function Home() {
       <div className="absolute bottom-40 left-10 md:left-40 w-48 md:w-72 h-48 md:h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-50 md:opacity-70 animate-float hidden md:block" style={{ animationDelay: '4s' }} />
       
       <div className="w-full max-w-3xl px-4 md:px-6 animate-fade-in relative z-10">
-        <div className="glass-card p-6 sm:p-8 md:p-12 touch-feedback">
+        <div className="glass-card p-6 sm:p-8 md:p-12 touch-feedback relative">
+          <ThemeToggle 
+            className={cn(
+              isMobile 
+                ? "-bottom-16 left-1/2 -translate-x-1/2" 
+                : "-top-14 -right-14"
+            )} 
+          />
           <div className="flex flex-col items-center mb-6 md:mb-8">
             <div className="relative mb-4 md:mb-6">
               <Logo className="animate-pulse-soft w-16 h-16 md:w-20 md:h-20" />

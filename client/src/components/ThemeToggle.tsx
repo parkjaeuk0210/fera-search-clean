@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-export function ThemeToggle() {
+interface ThemeToggleProps {
+  className?: string;
+}
+
+export function ThemeToggle({ className }: ThemeToggleProps = {}) {
   const [theme, setTheme] = useState("light");
   const [isAnimating, setIsAnimating] = useState(false);
   const isMobile = useIsMobile();
@@ -26,20 +30,21 @@ export function ThemeToggle() {
     <button
       onClick={toggleTheme}
       className={cn(
-        "fixed z-[60]",
-        isMobile ? "bottom-20 left-4" : "top-4 left-4",
-        "w-11 h-11 sm:w-12 sm:h-12 rounded-2xl",
-        "bg-background/80 backdrop-blur-xl",
-        "border border-border/60",
-        "shadow-lg shadow-black/10 dark:shadow-black/20",
+        "absolute z-50",
+        "w-10 h-10 rounded-full",
+        "bg-background/60 backdrop-blur-xl",
+        "border border-border/30",
+        "shadow-md shadow-black/5 dark:shadow-black/10",
         "transition-all duration-300",
-        "group relative",
+        "group",
         "flex items-center justify-center",
         "overflow-hidden",
-        "hover:bg-background/90 hover:border-border",
-        "hover:shadow-xl hover:scale-105",
+        "opacity-50 hover:opacity-100",
+        "hover:bg-background/80 hover:border-border/50",
+        "hover:shadow-lg hover:scale-110",
         "active:scale-95",
-        isMobile && "safe-bottom"
+        "animate-float",
+        className
       )}
       aria-label="Toggle theme"
     >
@@ -47,14 +52,14 @@ export function ThemeToggle() {
         {theme === "light" ? (
           <Moon 
             className={cn(
-              "h-5 w-5 text-purple-600",
+              "h-4 w-4 text-purple-600",
               isAnimating && "animate-spin"
             )} 
           />
         ) : (
           <Sun 
             className={cn(
-              "h-5 w-5 text-yellow-500",
+              "h-4 w-4 text-yellow-500",
               isAnimating && "animate-spin"
             )} 
           />

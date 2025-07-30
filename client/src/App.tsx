@@ -5,7 +5,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import { NetworkStatus } from "@/components/NetworkStatus";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 function App() {
   const [location] = useLocation();
@@ -13,7 +12,6 @@ function App() {
   return (
     <>
       <NetworkStatus />
-      {location === "/" && <ThemeToggle />}
       <AnimatePresence mode="wait">
         <Switch location={location} key={location}>
           <Route path="/" component={Home} />
