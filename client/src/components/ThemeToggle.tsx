@@ -52,14 +52,14 @@ export function ThemeToggle({ className }: ThemeToggleProps = {}) {
           <Moon 
             className={cn(
               "h-4 w-4 text-purple-600",
-              isAnimating && "animate-spin"
+              isAnimating && "animate-spin-once"
             )} 
           />
         ) : (
           <Sun 
             className={cn(
               "h-4 w-4 text-yellow-500",
-              isAnimating && "animate-spin"
+              isAnimating && "animate-spin-once"
             )} 
           />
         )}
