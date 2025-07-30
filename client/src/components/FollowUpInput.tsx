@@ -43,13 +43,14 @@ export function FollowUpInput({
             onKeyDown={handleKeyDown}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            placeholder="Ask a follow-up question..."
+            placeholder="..."
             className={cn(
               "w-full px-4 py-3 glass-input rounded-xl",
               "transition-all duration-200",
               "focus:ring-4 focus:ring-primary/30 outline-none",
-              "placeholder:text-muted-foreground/70",
-              "touch-target"
+              "placeholder:text-muted-foreground/50",
+              "touch-target",
+              "animate-pulse-soft" // subtle pulsing effect
             )}
             disabled={isLoading}
           />
