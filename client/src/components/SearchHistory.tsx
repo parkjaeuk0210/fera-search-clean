@@ -116,7 +116,7 @@ export function SearchHistory({
                     <Card
                       className={cn(
                         "p-3 sm:p-4 cursor-pointer transition-all hover:shadow-md glass touch-feedback",
-                        currentSessionId === session.id && "ring-2 ring-primary"
+                        currentSessionId === session.id && "bg-primary/5 border-primary/20"
                       )}
                       onClick={() => handleSelectSession(session)}
                     >

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLocation } from 'wouter';
 import { Search, Sparkles } from 'lucide-react';
 import { Logo } from '@/components/Logo';
+import { cn } from '@/lib/utils';
 
 export function Home() {
   const [query, setQuery] = useState('');
@@ -65,11 +66,17 @@ export function Home() {
                 type="submit"
                 disabled={!query.trim()}
                 className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 p-3 rounded-xl
-                         glass-button glass-hover glass-active touch-feedback
-                         disabled:opacity-50 disabled:hover:transform-none
+                         glass-button glass-active touch-feedback
+                         transition-all duration-150 ease-out
+                         hover:bg-primary/10 hover:shadow-md
+                         disabled:opacity-50 disabled:hover:bg-transparent
                          disabled:hover:shadow-none touch-target"
               >
-                <Search className={`w-5 h-5 transition-all duration-300 ${isHovered && query.trim() ? 'text-primary' : 'text-muted-foreground'} ${!query && 'animate-pulse-soft'}`} />
+                <Search className={cn(
+                  "w-5 h-5 transition-all duration-150 ease-out",
+                  isHovered ? "text-primary scale-110" : "text-muted-foreground",
+                  !query && !isHovered && "animate-pulse-soft"
+                )} />
               </button>
               
             </div>
