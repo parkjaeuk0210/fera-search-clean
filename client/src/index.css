@@ -260,6 +260,27 @@ body {
   }
 }
 
+@keyframes typing-dots {
+  0% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes input-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px 2px rgba(59, 130, 246, 0.15);
+  }
+}
+
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
@@ -270,6 +291,23 @@ body {
 
 .animate-slide-in {
   animation: slide-in 0.3s ease-out forwards;
+}
+
+.animate-typing-dots span {
+  animation: typing-dots 1.4s infinite;
+  display: inline-block;
+}
+
+.animate-typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.animate-typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.animate-input-glow {
+  animation: input-glow 2s ease-in-out infinite;
 }
 
 /* Reduce animation on mobile for better performance */

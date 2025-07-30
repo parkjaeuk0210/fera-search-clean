@@ -33,6 +33,14 @@ export function FollowUpInput({
       <div className="flex items-center gap-2 mb-3">
         <MessageSquarePlus className="h-5 w-5 text-primary" />
         <Sparkles className="h-4 w-4 text-yellow-400 animate-pulse" />
+        {/* Optional: Typing animation dots */}
+        {!query && !isFocused && (
+          <div className="animate-typing-dots text-muted-foreground/50 ml-auto">
+            <span>•</span>
+            <span>•</span>
+            <span>•</span>
+          </div>
+        )}
       </div>
       
       <div className="relative flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -43,14 +51,14 @@ export function FollowUpInput({
             onKeyDown={handleKeyDown}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            placeholder="..."
+            placeholder={isFocused ? "" : "..."} // Hide placeholder when focused
             className={cn(
               "w-full px-4 py-3 glass-input rounded-xl",
               "transition-all duration-200",
               "focus:ring-4 focus:ring-primary/30 outline-none",
               "placeholder:text-muted-foreground/50",
               "touch-target",
-              "animate-pulse-soft" // subtle pulsing effect
+              !isFocused && !query && "animate-input-glow" // Glow effect when empty and not focused
             )}
             disabled={isLoading}
           />
