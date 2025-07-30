@@ -81,10 +81,7 @@ export function FollowUpInput({
           {isLoading ? (
             <Loader2 className="h-4 w-4 animate-spin" />
           ) : (
-            <>
-              <span>Ask</span>
-              <Sparkles className="h-4 w-4" />
-            </>
+            <Sparkles className="h-4 w-4" />
           )}
         </button>
       </div>
